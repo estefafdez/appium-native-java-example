@@ -1,0 +1,190 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++ BASICS ++++++++++++++++++++++++++++++++++++++++ -->
+   <groupId>org.estefafdez</groupId>
+  <artifactId>appium-native-java-example</artifactId>
+  <version>1.0.1</version>
+  <packaging>jar</packaging>
+	
+	<!-- +++++++++++++++++++++++++++++++ DEVELOPERS & ORGANIZATION ++++++++++++++++++++++++++++++  -->
+	<developers>
+			<developer>
+				<name>estefafdez</name>
+			</developer>
+		</developers>
+		
+		<!-- ++++++++++++++++++++++++++++++++++++++++  DEPENDENCIES ++++++++++++++++++++++++++++++++++++++++  -->
+	<dependencies>
+		
+		<!-- Test engine -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+		</dependency>
+		
+		<!-- Apache commons -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+		
+		<!-- Appium -->
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>${appium-java-client.version}</version>
+		</dependency>
+		
+		<!-- Log4j 2 commons -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		
+		<!-- Sonar -->
+		<dependency>
+			<groupId>org.codehaus.sonar</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>${sonar-maven-plugin.version}</version>
+		</dependency>
+
+	</dependencies>	
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++ PROPERTIES ++++++++++++++++++++++++++++++++++++++  -->
+	<properties>
+	
+	<!--  Dependencies -->
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<testng.version>6.11</testng.version>
+		<commons-lang3.version>3.6</commons-lang3.version>
+		<aspectj.version>1.8.11</aspectj.version>
+		<appium-java-client.version>6.1.0</appium-java-client.version>
+		<log4j2.version>2.9.0</log4j2.version>
+		
+		<!-- Plugins -->
+		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+		<sonar-maven-plugin.version>5.1</sonar-maven-plugin.version>
+		<sonar-scanner-maven-plugin.version>3.3.0.603</sonar-scanner-maven-plugin.version>
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+		
+		<!-- ++++++++++++++++++++++++++++++ TEST EXECUTIONS PARAMETERS ++++++++++++++++++++++++++++++  -->
+		
+		<!-- Which mobile OS platform to use -->
+		<platformName>android</platformName>
+	
+		<!-- Suite -->
+		<testSuite>src/test/resources/suites/regression.xml</testSuite>
+		
+		<!-- Log Mode section -->
+		<!-- Parameter for logger level use in this order to include the right information [ALL > DEBUG > INFO > WARN > ERROR > FATAL > OFF]-->
+		<logLevel>INFO</logLevel>
+
+	</properties>
+	
+	<!-- ++++++++++++++++++++++++++++++++++++++++  PROFILES ++++++++++++++++++++++++++++++++++++++++  -->
+	
+	<profiles>
+	<!-- Sonar Profile -->
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Optional URL to server. Default value is http://localhost:9000 -->
+				<sonar.host.url>
+					http://localhost:9000
+				</sonar.host.url>
+			</properties>
+		</profile>
+		
+		<!-- Suite Profile -->
+		<profile>
+            <id>ANDROID</id>
+            <properties>
+                <testSuite>src/test/resources/suites/android.xml</testSuite>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>IOS</id>
+            <properties>
+                <testSuite>src/test/resources/suites/ios.xml</testSuite>
+            </properties>
+        </profile>
+        
+	</profiles>
+
+	<!-- ++++++++++++++++++++++++++++++++++++++++  BUILD PHASE ++++++++++++++++++++++++++++++++++++++++  -->
+
+	<build>
+		<!-- Test Resources-->
+		<testResources>
+			<testResource>
+				<directory>src/test/resources/</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+		
+		<!-- ++++++++++++++++++++++++++++++++++++++++  PLUGINS ++++++++++++++++++++++++++++++++++++++++  -->
+		
+		<plugins>
+			<!-- Surefire plugin to define suites xml files -->
+			<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                         <encoding>UTF-8</encoding>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>${testSuite}</suiteXmlFile>
+                        </suiteXmlFiles>
+                    </configuration>
+            </plugin>
+			
+			<!-- Maven Plugins -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!-- Sonar Maven Plugin -->
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>${sonar-scanner-maven-plugin.version}</version>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
