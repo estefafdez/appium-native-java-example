@@ -21,23 +21,14 @@ public class AndroidHomePage extends BasePageObjectConfig{
 		super(driver);
 	}
 
-/*	*//**
-	 * Method to check if the Page is Ready.
-	 *//*
-	@Override
-	public boolean isReady() {
-		LOGGER.info("Launch isReady " + this.getClass().getSimpleName());
-		return this.isReadyPage(AndroidHomeConst.SET_UP_ANDROID_IS_READY);
-	}
-
-	*//**
+	
+	/**
 	 * Method to wait until the Page is Ready. 
-	 *//*
-	@Override
-	public boolean waitForReady() {
+	 */
+	public boolean waitForReadyPageByID() {
 		LOGGER.info("Launch waitForReady " + this.getClass().getSimpleName());
-		return this.waitForReadyPage(AndroidHomeConst.SET_UP_ANDROID_IS_READY);
-	}*/
+		return this.waitForReadyPageByID(AndroidHomeConst.SET_UP_ANDROID_IS_READY);
+	}
 	
 	/**
 	 * Method to click on the input (edit text)

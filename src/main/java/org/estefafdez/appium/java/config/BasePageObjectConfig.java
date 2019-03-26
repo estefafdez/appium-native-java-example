@@ -78,10 +78,6 @@ public abstract class BasePageObjectConfig {
 	
 	/** Get the Platform from the Test Capabilities */
 	String platformName = handler.getConfigValueFromMatrix("config.platformName");
-	
-	/** Define one platformName option*/
-	private static final String ANDROID = "android";
-	
 
 	/*--------------------------------------------------------------------* 
 	|	CONSTRUCTOR
@@ -190,8 +186,6 @@ public abstract class BasePageObjectConfig {
 		}
 		return true;
 	}
-
-
 
 	/**
 	 * Method to wait until an element with a selector by ID is visible
@@ -472,7 +466,7 @@ public abstract class BasePageObjectConfig {
 	 * @param attribute name of the attribute to find
 	 * @return the value of the attribute
 	 */
-	protected String getValueOfElementAttributeByPath(String selector, String attribute) {
+	protected String getValueOfElementAttributeByXpath(String selector, String attribute) {
 		String value = null;
 		try {
 			LOGGER.debug("Getting attribute [" + attribute + "] from element: [" + selector + "]");
