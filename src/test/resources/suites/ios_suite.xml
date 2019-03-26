@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="iosTestSuite" verbose="1">
+	<test name="IosHomeTestSet">
+  		<classes>
+  			<class name="org.sdos.appium.archetype.IosHomeTestSet"></class>
+  		</classes>
+  	</test>	
+  	
+</suite>

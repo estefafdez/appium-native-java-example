@@ -3,20 +3,52 @@
   <modelVersion>4.0.0</modelVersion>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++ BASICS ++++++++++++++++++++++++++++++++++++++++ -->
-   <groupId>org.estefafdez</groupId>
-  <artifactId>appium-native-java-example</artifactId>
-  <version>1.0.1</version>
+  <groupId>org.estefafdez</groupId>
+  <artifactId>appium-java</artifactId>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 	
-	<!-- +++++++++++++++++++++++++++++++ DEVELOPERS & ORGANIZATION ++++++++++++++++++++++++++++++  -->
+	<!-- +++++++++++++++++++++++++++++ DEVELOPERS +++++++++++++++++++++++++++++ -->
 	<developers>
-			<developer>
-				<name>estefafdez</name>
-			</developer>
-		</developers>
+		<developer>
+			<id>ffgonzalez</id>
+			<name>Francisco José Fernández González</name>
+			<email>ffgonzalez1989@gmail.com</email>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Madrid</timezone>
+		</developer>
+		<developer>
+			<id>estefafdez</id>
+			<name>Estefanía Fernández Muñoz</name>
+			<email>estefafdez@gmail.com</email>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Madrid</timezone>
+		</developer>
+	</developers>
+	
+	<!-- +++++++++++++++++++++++++++++ LICENSE +++++++++++++++++++++++++++++ -->
+	<licenses>
+		<license>
+			<name>GNU General Public License (GPL)</name>
+			<url>http://www.gnu.org/licenses/gpl.txt</url>
+		</license>
+	</licenses>
 		
-		<!-- ++++++++++++++++++++++++++++++++++++++++  DEPENDENCIES ++++++++++++++++++++++++++++++++++++++++  -->
+	<!-- ++++++++++++++++++++++++++++++++++++++++  DEPENDENCIES ++++++++++++++++++++++++++++++++++++++++  -->
 	<dependencies>
+		
+		<!-- Appium -->
+		<dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>${appium-java-client.version}</version>
+		</dependency>
 		
 		<!-- Test engine -->
 		<dependency>
@@ -30,13 +62,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3.version}</version>
-		</dependency>
-		
-		<!-- Appium -->
-		<dependency>
-			<groupId>io.appium</groupId>
-			<artifactId>java-client</artifactId>
-			<version>${appium-java-client.version}</version>
 		</dependency>
 		
 		<!-- Log4j 2 commons -->
@@ -57,6 +82,13 @@
 			<artifactId>sonar-maven-plugin</artifactId>
 			<version>${sonar-maven-plugin.version}</version>
 		</dependency>
+		
+		<!-- Guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
 
 	</dependencies>	
 	
@@ -66,11 +98,14 @@
 	<!--  Dependencies -->
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<appium-java-client.version>5.0.4</appium-java-client.version>
 		<testng.version>6.11</testng.version>
 		<commons-lang3.version>3.6</commons-lang3.version>
 		<aspectj.version>1.8.11</aspectj.version>
 		<appium-java-client.version>6.1.0</appium-java-client.version>
 		<log4j2.version>2.9.0</log4j2.version>
+		<appium-core.version>1.4.0</appium-core.version>
+		<guava.version>24.0-jre</guava.version>
 		
 		<!-- Plugins -->
 		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
@@ -82,17 +117,26 @@
 		<!-- ++++++++++++++++++++++++++++++ TEST EXECUTIONS PARAMETERS ++++++++++++++++++++++++++++++  -->
 		
 		<!-- Which mobile OS platform to use -->
-		<platformName>android</platformName>
-	
+		<!-- <devicePlatformName>Android</devicePlatformName> -->
+		<devicePlatformName>iOS</devicePlatformName>
+		
+		<!-- App properties -->
+		<!-- The .ipa or .apk file -->
+		<!-- <deviceApp>AndroidBaristaApp.apk</deviceApp> -->
+		<deviceApp>TestApp.app</deviceApp>
+		
 		<!-- Suite -->
 		<testSuite>src/test/resources/suites/regression.xml</testSuite>
 		
 		<!-- Log Mode section -->
 		<!-- Parameter for logger level use in this order to include the right information [ALL > DEBUG > INFO > WARN > ERROR > FATAL > OFF]-->
 		<logLevel>INFO</logLevel>
+		
+		<!-- Parameter for Appium Server Logger Level use in this order to include the right information [DEBUG > INFO > WARN]. WARN By Default -->
+		<appiumServerLogLevel>WARN</appiumServerLogLevel>
 
 	</properties>
-	
+
 	<!-- ++++++++++++++++++++++++++++++++++++++++  PROFILES ++++++++++++++++++++++++++++++++++++++++  -->
 	
 	<profiles>
@@ -105,23 +149,30 @@
 			<properties>
 				<!-- Optional URL to server. Default value is http://localhost:9000 -->
 				<sonar.host.url>
-					http://localhost:9000
+					http://sonar.dev.sdos.es
 				</sonar.host.url>
 			</properties>
 		</profile>
 		
 		<!-- Suite Profile -->
 		<profile>
-            <id>ANDROID</id>
+            <id>ACCEPTANCE</id>
             <properties>
-                <testSuite>src/test/resources/suites/android.xml</testSuite>
+                <testSuite>src/test/resources/suites/acceptance.xml</testSuite>
             </properties>
         </profile>
         
         <profile>
-            <id>IOS</id>
+            <id>REGRESSION</id>
             <properties>
-                <testSuite>src/test/resources/suites/ios.xml</testSuite>
+                <testSuite>src/test/resources/suites/regression.xml</testSuite>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>FAILED</id>
+            <properties>
+                <testSuite>src/test/resources/suites/failed.xml</testSuite>
             </properties>
         </profile>
         
