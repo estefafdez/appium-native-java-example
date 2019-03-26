@@ -19,16 +19,12 @@
  */
 package org.estefafdez.appium.java.config;
 
-import static org.testng.Assert.assertTrue;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -37,6 +33,9 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.estefafdez.appium.java.utils.AppiumServerHandler;
+import org.estefafdez.appium.java.utils.CustomAssertHandler;
+import org.estefafdez.appium.java.utils.CustomErrorException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.ITestResult;
@@ -83,11 +82,6 @@ public abstract class TestSetConfig {
 
 	/** Handler to access to the properties matrix */
 	private static PropertiesManager handler = PropertiesManager.getInstance();
-
-	/** Mandatory Capabilities list */
-	private static List<String> mandatoryCapabilities = Arrays.asList(MobileCapabilityType.APP,
-			MobileCapabilityType.PLATFORM_NAME, MobileCapabilityType.PLATFORM_VERSION,
-			AndroidMobileCapabilityType.APP_PACKAGE);
 
 	/*--------------------------------------------------------------------* 
 	|		LIFE CYCLE												
@@ -148,7 +142,13 @@ public abstract class TestSetConfig {
 	protected void tearDownAppium() {
 		LOGGER.info(ConstantConfig.LOG_SEPARATOR);
 		LOGGER.info("[ Driver Configuration ] - Unistalling the current running App");
-		driver.removeApp(handler.getConfigValueFromMatrix(ConstantConfig.APP_PACKAGE));
+		if ((MobilePlatform.ANDROID).equalsIgnoreCase(handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME))) {
+			driver.removeApp((String) caps.getCapability(AndroidMobileCapabilityType.APP_PACKAGE));
+		}
+		else {
+			driver.removeApp((String) caps.getCapability(IOSMobileCapabilityType.BUNDLE_ID));
+		}
+		
 		LOGGER.info("[ Driver Configuration ] - Quit this Driver, closing every instance associated");
 		driver.quit();
 		LOGGER.info(ConstantConfig.LOG_SEPARATOR);
@@ -196,50 +196,6 @@ public abstract class TestSetConfig {
 			Configurator.setRootLevel(Level.getLevel(logLevel));
 			LOGGER.info("[ System Properties ] - Log Level stablished on: " + logLevel);
 		}
-	}
-	
-	/**
-	 * Method to set the Level Log. [DEBUG - INFO - WARN]
-	 * @return log level of the Appium Server.
-	 */
-	public static String setUpAppiumServerLevelLogger() {
-		
-		String appiumLogLevelDefault = ConstantConfig.SERV_LOG_LEVEL_WARN;
-
-		/** Appium Log Level from the POM */
-		String appiumLogLevelPOM = handler.getConfigValueFromMatrix(ConstantConfig.APPIUM_LOG_LEVEL);
-		
-		/** Appium Log Level to Set*/
-		String appiumLogLevel = null;
-
-		LOGGER.info(ConstantConfig.LOG_SEPARATOR);
-		LOGGER.info("[ System Properties ] - Setting Appium Server Log Level");
-
-		/** The value of the LOG is not valid */
-		if (appiumLogLevelPOM == null || appiumLogLevelPOM.isEmpty()) {
-			LOGGER.info("[ System Properties ] - There is not a defined Appium Server Log Level, we are using the default: "
-					+ appiumLogLevelDefault);
-			appiumLogLevel = ConstantConfig.SERV_LOG_LEVEL_WARN;
-		} 
-		
-		/** The value of the LOG is correct */
-		else {
-			/** The value is WARN */
-			if (appiumLogLevelPOM.equalsIgnoreCase("WARN")) {
-				appiumLogLevel = ConstantConfig.SERV_LOG_LEVEL_WARN;
-			}
-			/** The value is INFO */
-			else if(appiumLogLevelPOM.equalsIgnoreCase("INFO")) {
-				appiumLogLevel = ConstantConfig.SERV_LOG_LEVEL_INFO;
-			} 
-			/** The value is DEBUG */
-			else if(appiumLogLevelPOM.equalsIgnoreCase("DEBUG")) {
-				appiumLogLevel = ConstantConfig.SERV_LOG_LEVEL_DEBUG;
-			}
-		}
-		
-		LOGGER.info("[ System Properties ] - Appium Server Log Level stablished on: " + appiumLogLevel);
-		return appiumLogLevel;
 	}
 	
 	/**
@@ -332,9 +288,6 @@ public abstract class TestSetConfig {
 			} else if (value.contains("$")) {
 				throw new CustomErrorException(
 						"[ Test Configuration error ] - The Desired Capability " + key + " is malformed to :" + value);
-			} else if (mandatoryCapabilities.stream().unordered().anyMatch(s -> key.equals(s) && value.isEmpty())) {
-				throw new CustomErrorException(
-						"[ Test Configuration error ] - The mandatory Desired Capability " + key + " is not defined");
 			} else if (value.isEmpty()) {
 				LOGGER.warn("[ Test Configuration ] - The Desired Capability: " + key + " is empty");
 			}
@@ -371,7 +324,7 @@ public abstract class TestSetConfig {
 	 * 
 	 * @param pageObject
 	 *            to check if its ready
-	 */
+	 *//*
 	public void isReady(BasePageObjectConfig pageObject) {
 
 		if (pageObject == null) {
@@ -382,12 +335,12 @@ public abstract class TestSetConfig {
 				"The Page " + pageObject.getClass().getSimpleName() + " isn't ready, it should not be displayed");
 	}
 
-	/**
+	*//**
 	 * Method to wait until the Page is Ready.
 	 * 
 	 * @param pageObject
 	 *            to wait until is ready
-	 */
+	 *//*
 	public void waitForReady(BasePageObjectConfig pageObject) {
 
 		if (pageObject == null) {
@@ -396,7 +349,7 @@ public abstract class TestSetConfig {
 
 		assertTrue(pageObject.waitForReady(),
 				"The Page " + pageObject.getClass().getSimpleName() + " isn't ready, it should not be displayed");
-	}
+	}*/
 
 	/**
 	 * Method to print all the Global Configuration on the Log.
@@ -405,26 +358,35 @@ public abstract class TestSetConfig {
 		LOGGER.info(ConstantConfig.LOG_SEPARATOR);
 		LOGGER.info("[ Test Configuration ] - Desired Capabilities Configuration established");
 		LOGGER.info(ConstantConfig.LOG_SEPARATOR);
-		LOGGER.info(" DEVICE PROPERTIES");
-		LOGGER.info("\tDevice Name:\t\t" + caps.getCapability(MobileCapabilityType.DEVICE_NAME));
-		LOGGER.info("\tPlatform Name:\t\t" + caps.getCapability(MobileCapabilityType.PLATFORM_NAME));
-		LOGGER.info("\tPlatform Version:\t" + caps.getCapability(MobileCapabilityType.PLATFORM_VERSION));
-		LOGGER.info("\tAutomation Engine:\t" + caps.getCapability(MobileCapabilityType.AUTOMATION_NAME));
-		LOGGER.info("\tNo Reset:\t\t" + caps.getCapability(MobileCapabilityType.NO_RESET));
-		LOGGER.info("\tFull Reset:\t\t" + caps.getCapability(MobileCapabilityType.FULL_RESET));
-		LOGGER.info("\tClean System Files:\t" + caps.getCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES));
-		LOGGER.info(" APP PROPERTIES");
-		LOGGER.info("\tApp:\t\t\t" + caps.getCapability(MobileCapabilityType.APP));
 		if ((MobilePlatform.ANDROID).equalsIgnoreCase(handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME))) {
+			LOGGER.info(" DEVICE PROPERTIES");
+			LOGGER.info("\tPlatform Name:\t\t" + caps.getCapability(MobileCapabilityType.PLATFORM_NAME));
+			LOGGER.info("\tDevice Name:\t\t" + caps.getCapability(MobileCapabilityType.DEVICE_NAME));
+			LOGGER.info("\tPlatform Version:\t" + caps.getCapability(MobileCapabilityType.PLATFORM_VERSION));
+			LOGGER.info("\tAutomation Engine:\t" + caps.getCapability(MobileCapabilityType.AUTOMATION_NAME));
+			LOGGER.info("\tNo Reset:\t\t" + caps.getCapability(MobileCapabilityType.NO_RESET));
+			LOGGER.info("\tFull Reset:\t\t" + caps.getCapability(MobileCapabilityType.FULL_RESET));
+			LOGGER.info("\tClean System Files:\t" + caps.getCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES));
+			LOGGER.info(" APP PROPERTIES");
+			LOGGER.info("\tApp:\t\t\t" + caps.getCapability(MobileCapabilityType.APP));
 			LOGGER.info(" ANDROID PROPERTIES");
 			LOGGER.info("\tApp Package:\t\t" + caps.getCapability(AndroidMobileCapabilityType.APP_PACKAGE));
 			LOGGER.info("\tApp Activity:\t\t" + caps.getCapability(AndroidMobileCapabilityType.APP_ACTIVITY));
 			LOGGER.info("\tApp Wait Activity:\t" + caps.getCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY));
 			LOGGER.info("\tAuto Grant Permissions:\t"
 					+ caps.getCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS));
-			LOGGER.info(
-					"\tDisable Watchers:\t" + caps.getCapability(AndroidMobileCapabilityType.DISABLE_ANDROID_WATCHERS));
+			LOGGER.info("\tDisable Watchers:\t" + caps.getCapability(AndroidMobileCapabilityType.DISABLE_ANDROID_WATCHERS));
 		} else {
+			LOGGER.info(" DEVICE PROPERTIES");
+			LOGGER.info("\tPlatform Name:\t\t" + caps.getCapability(MobileCapabilityType.PLATFORM_NAME));
+			LOGGER.info("\tDevice Name:\t\t" + caps.getCapability(MobileCapabilityType.DEVICE_NAME));
+			LOGGER.info("\tPlatform Version:\t" + caps.getCapability(MobileCapabilityType.PLATFORM_VERSION));
+			LOGGER.info("\tAutomation Engine:\t" + caps.getCapability(MobileCapabilityType.AUTOMATION_NAME));
+			LOGGER.info("\tNo Reset:\t\t" + caps.getCapability(MobileCapabilityType.NO_RESET));
+			LOGGER.info("\tFull Reset:\t\t" + caps.getCapability(MobileCapabilityType.FULL_RESET));
+			LOGGER.info("\tClean System Files:\t" + caps.getCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES));
+			LOGGER.info(" APP PROPERTIES");
+			LOGGER.info("\tApp:\t\t\t" + caps.getCapability(MobileCapabilityType.APP));
 			LOGGER.info(" iOS PROPERTIES");
 			LOGGER.info("\tApp Package:\t\t" + caps.getCapability(IOSMobileCapabilityType.BUNDLE_ID));
 			LOGGER.info("\tShow Xcode Log:\t\t" + caps.getCapability(IOSMobileCapabilityType.SHOW_XCODE_LOG));

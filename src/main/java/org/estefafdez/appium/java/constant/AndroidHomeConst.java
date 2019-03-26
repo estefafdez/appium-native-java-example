@@ -11,14 +11,14 @@ public class AndroidHomeConst {
 	*---------------------------------------------------------------------*/
 	
 	/* HOME PAGE */
-	public static final String HEADER_LABEL_TITLE = "header.label.title";
-	public static final String BODY_LAYOUT = "body.layout";
-	public static final String BODY_LABEL_SUBTITLE = "body.label.subtitle";
-	public static final String BODY_INPUT_TEXTBOX = "body.input.textbox";
-	public static final String BODY_BUTTON_BUTTON1 = "body.button.button1";
-	public static final String BODY_BUTTON_BUTTON2 = "body.button.button2";
-	public static final String BODY_BUTTON_BUTTON3 = "body.button.button3";
-	public static final String BODY_BUTTON_BUTTON4 = "body.button.button4";
+	public static final String HEADER_LABEL_TITLE = "action_bar";
+	public static final String BODY_LAYOUT = "content";
+	public static final String BODY_LABEL_SUBTITLE = "texto";
+	public static final String BODY_INPUT_TEXTBOX = "editText";
+	public static final String BODY_BUTTON_BUTTON1 = "button1";
+	public static final String BODY_BUTTON_BUTTON2 = "button2";
+	public static final String BODY_BUTTON_BUTTON3 = "button3";
+	public static final String BODY_BUTTON_BUTTON4 = "buttonActivity";
 	
 	/*--------------------------------------------------------------------*
 	|       SET UP BLOCK                                                   

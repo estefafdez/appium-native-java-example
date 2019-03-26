@@ -21,10 +21,8 @@ public class AndroidHomeTestSet extends TestSetConfig {
 		AndroidHomePage androidHomePage = new AndroidHomePage(driver);
 
 		/** Wait until the Home Page is ready */
-		waitForReady(androidHomePage);
+		//waitForReady(androidHomePage);
 		
-		androidHomePage.getHomePageContext();
-
 		/** Perform a Long click on an element. */
 		androidHomePage.performLongClickOnInput();
 

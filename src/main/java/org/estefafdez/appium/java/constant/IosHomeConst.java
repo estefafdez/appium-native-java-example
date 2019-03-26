@@ -11,14 +11,14 @@ public class IosHomeConst {
 	*---------------------------------------------------------------------*/
 
 	/* HOME PAGE */
-	public static final String BODY_LABEL_ENTER_NAME = "body.label.enter.name";
-	public static final String BODY_INPUT_ENTER_YOUR_NAME = "body.input.enter.your.name";
-	public static final String BODY_BUTTON_CLICK = "body.button.click";
-	public static final String BODY_LABEL_SWITCH_BUTTON_TEXT = "body.label.switch.button.text";
-	public static final String BODY_BUTTON_SWITCH = "body.button.switch";
-	public static final String BODY_LABEL_HEY_THERE = "body.label.hey.there";
-	public static final String BODY_BUTTON_INCREASE_TEXT = "body.button.increase.text";
-	
+	public static final String BODY_LABEL_ENTER_NAME = "enter_your_name_label";
+	public static final String BODY_INPUT_ENTER_YOUR_NAME = "enter_your_name_textbox";
+	public static final String BODY_BUTTON_CLICK = "click_button";
+	public static final String BODY_LABEL_SWITCH_BUTTON_TEXT = "click_switch_button_text";
+	public static final String BODY_BUTTON_SWITCH = "switch_button";
+	public static final String BODY_LABEL_HEY_THERE = "hey_there_text";
+	public static final String BODY_BUTTON_INCREASE_TEXT = "ui_slider_button";
+
 	/*--------------------------------------------------------------------*
 	|       SET UP BLOCK                                                   
 	*---------------------------------------------------------------------*/  

@@ -131,9 +131,6 @@
 		<!-- Log Mode section -->
 		<!-- Parameter for logger level use in this order to include the right information [ALL > DEBUG > INFO > WARN > ERROR > FATAL > OFF]-->
 		<logLevel>INFO</logLevel>
-		
-		<!-- Parameter for Appium Server Logger Level use in this order to include the right information [DEBUG > INFO > WARN]. WARN By Default -->
-		<appiumServerLogLevel>WARN</appiumServerLogLevel>
 
 	</properties>
 

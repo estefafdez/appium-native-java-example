@@ -20,7 +20,7 @@ public class IosHomeTestSet extends TestSetConfig {
 			IosHomePage iosHomePage = new IosHomePage(driver);			
 			
 			/** Wait until the Home Page is ready */
-			waitForReady(iosHomePage);
+			iosHomePage.waitForReadyPageByID();
 	
 			/** Click on the input "Enter your name" */
 			iosHomePage.clickOnInput();

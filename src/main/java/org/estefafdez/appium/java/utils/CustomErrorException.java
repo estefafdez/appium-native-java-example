@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-package org.estefafdez.appium.java.config;
+package org.estefafdez.appium.java.utils;
 
 /**
  * <p>
@@ -33,45 +33,33 @@ package org.estefafdez.appium.java.config;
  * <a href="https://github.com/estefafdez">https://github.com/estefafdez</a><br>
  *
  */
-public class CustomAssertHandler{
+public class CustomErrorException extends Exception{
 
-	/**
-	 * Protect constructor since it is a static only class
-	 */
-	protected CustomAssertHandler() {
-		// Empty constructor
-	}
-
-	/**
-	 * Fails a test with the given message and wrapping the original exception.
-	 *
-	 * @param message
-	 *            the assertion error message
-	 * @param realCause
-	 *            the original exception
-	 */
-	public static void handlerError(String message, Throwable realCause) {
-		AssertionError ae = new AssertionError(message);
-		ae.initCause(realCause);
-		throw ae;
-	}
+	private static final long serialVersionUID = -6762514709075847617L;
 	
-
 	/**
-	 * Fails a test with the given message.
-	 * 
-	 * @param message
-	 *            the assertion error message
+	 * Method to create a custom error exception with only a message. 
+	 * @param message the message to display
 	 */
-	public static void handlerError(String message) {
-		throw new AssertionError(message);
+	public CustomErrorException(String message) {
+		super(message);
 	}
 
 	/**
-	 * Fails a test with no message.
+	 * Method to create a custom error exception with a message and the cause. 
+	 * @param message the message to display
+	 * @param cause real cause of the error
 	 */
-	public static void handlerError() {
-		handlerError(null);
+	public CustomErrorException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	/**
+	 * Method to create a custom error exception with only the cause. 
+	 * @param cause real cause of the error
+	 */
+	public CustomErrorException(Throwable cause) {
+		super(cause);
 	}
 
 }

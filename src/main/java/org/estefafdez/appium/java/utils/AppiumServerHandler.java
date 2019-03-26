@@ -17,12 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-package org.estefafdez.appium.java.config;
+package org.estefafdez.appium.java.utils;
 
 import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.estefafdez.appium.java.config.ConstantConfig;
 
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
@@ -75,7 +76,7 @@ public final class AppiumServerHandler {
 			AppiumServiceBuilder builder = new AppiumServiceBuilder();
 
 			/** This filters ALL Appium server logs to warning level */
-			builder.withArgument(GeneralServerFlag.LOG_LEVEL, TestSetConfig.setUpAppiumServerLevelLogger());
+			builder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
 			/** Used to control the start timeouts */
 			builder.withStartUpTimeOut(60, TimeUnit.SECONDS);
 			/** Used to avoid port collisions */

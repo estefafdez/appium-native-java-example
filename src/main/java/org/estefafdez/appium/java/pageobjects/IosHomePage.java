@@ -21,29 +21,20 @@ public class IosHomePage extends BasePageObjectConfig{
 		super(driver);
 	}
 
-	/**
-	 * Method isReady
-	 */
-	@Override
-	public boolean isReady() {
-		LOGGER.info("Launch isReady " + this.getClass().getSimpleName());
-		return this.isReadyPage(IosHomeConst.SET_UP_IOS_IS_READY);
-	}
-
+	
 	/**
 	 * Method wait for ready
 	 */
-	@Override
-	public boolean waitForReady() {
+	public boolean waitForReadyPageByID() {
 		LOGGER.info("Launch waitForReady " + this.getClass().getSimpleName());
-		return this.waitForReadyPage(IosHomeConst.SET_UP_IOS_IS_READY);
+		return this.waitForReadyPageByID(IosHomeConst.SET_UP_IOS_IS_READY);
 	}
 	
 	/**
 	 * Method to click on the button Click!
 	 */
 	public void clickOnButton() {
-		this.clickOnElement(IosHomeConst.BODY_BUTTON_CLICK);
+		this.clickOnElementByID(IosHomeConst.BODY_BUTTON_CLICK);
 	}
 	
 	/**
@@ -51,7 +42,7 @@ public class IosHomePage extends BasePageObjectConfig{
 	 * @param text to send
 	 */
 	public void sendKeyToInput(String text) {
-		this.sendTextToElement(IosHomeConst.BODY_INPUT_ENTER_YOUR_NAME, text);
+		this.sendTextToElementByID(IosHomeConst.BODY_INPUT_ENTER_YOUR_NAME, text);
 	}
 
 	
@@ -60,7 +51,7 @@ public class IosHomePage extends BasePageObjectConfig{
 	 * @param text to check on the label
 	 */
 	public boolean checkSwitchLabel(String text) {
-		return this.isElementVisible(IosHomeConst.BODY_LABEL_SWITCH_BUTTON_TEXT, text);
+		return this.getValueOfElementAttributeByID(IosHomeConst.BODY_LABEL_SWITCH_BUTTON_TEXT, "value").equals(text);
 	}
 	
 	/**
@@ -69,21 +60,21 @@ public class IosHomePage extends BasePageObjectConfig{
 	 * @return true|false with the value of the status. 1 true, 0 false. 
 	 */
 	public boolean checkSwitchButtonStatus() {
-		return this.getValueOfElementAttribute(IosHomeConst.BODY_BUTTON_SWITCH, "value").equalsIgnoreCase("1");
+		return this.getValueOfElementAttributeByID(IosHomeConst.BODY_BUTTON_SWITCH, "value").equalsIgnoreCase("1");
 	}
 	
 	/**
 	 * Method to click on the switch button.
 	 */
 	public void clickOnSwitchButton() {
-		this.clickOnElement(IosHomeConst.BODY_BUTTON_SWITCH);
+		this.clickOnElementByID(IosHomeConst.BODY_BUTTON_SWITCH);
 	}
 
 	/**
 	 * Method to click on the input text box. 
 	 */
 	public void clickOnInput() {
-		this.clickOnElement(IosHomeConst.BODY_INPUT_ENTER_YOUR_NAME);
+		this.clickOnElementByID(IosHomeConst.BODY_INPUT_ENTER_YOUR_NAME);
 	}
 	
 }

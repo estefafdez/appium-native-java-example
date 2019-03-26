@@ -24,6 +24,8 @@ import java.net.URL;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.estefafdez.appium.java.utils.AppiumServerHandler;
+import org.estefafdez.appium.java.utils.CustomErrorException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.AppiumDriver;

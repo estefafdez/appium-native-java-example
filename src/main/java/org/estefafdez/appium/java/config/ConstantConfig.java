@@ -49,42 +49,6 @@ public final class ConstantConfig {
 	 * </pre>
 	 */
 	public static final String CONFIG_FILE_PROP = "test";
-
-	/**
-	 * Key to be used in the {@link PropertiesManager} to get the value of 
-	 * the pom.xml
-	 * <p>
-	 * This constant is the address of the Appium server.
-	 * 
-	 * <pre>
-	 * Example of value: http://127.0.0.1:4723/wd/hub
-	 * </pre>
-	 */
-	public static final String APPIUM_SERVER = "config.appiumServer";
-
-	/**
-	 * Key to be used in the {@link PropertiesManager} to get the value of 
-	 * the pom.xml.
-	 * <p>
-	 * This constant is the name of the device used to emulated.
-	 * 
-	 * <pre>
-	 * Example of value: Google_pixel
-	 * </pre>
-	 */
-	public static final String DEVICE_NAME = "config.deviceName";
-	
-	/**
-	 * Key to be used in the {@link TestSetConfig} to get the value of 
-	 * the pom.xml.
-	 * <p>
-	 * This constant is the boolean option reset the app
-	 * 
-	 * <pre>
-	 * Example of value: true | false
-	 * </pre>
-	 */
-	public static final String DEVICE_FULL_RESET = "config.deviceFullReset";
 	
 	/**
 	 * Key to be used in the {@link PropertiesManager} to get the value of 
@@ -97,18 +61,6 @@ public final class ConstantConfig {
 	 * </pre>
 	 */
 	public static final String PLATFORM_NAME = "config.platformName";
-	
-	/**
-	 * Key to be used in the {@link PropertiesManager} to get the value of 
-	 * the pom.xml.
-	 * <p>
-	 * This constant is the API version of the device used to emulated.
-	 * 
-	 * <pre>
-	 * Example of value: 24 (Android), 11.0 (iOS).
-	 * </pre>
-	 */
-	public static final String PLATFORM_VERSION = "config.platformVersion";
 
 	/**
 	 * Key to be used in the {@link PropertiesManager} to get the value of 
@@ -117,91 +69,10 @@ public final class ConstantConfig {
 	 * This constant is the name and the path of the APP used to emulated.
 	 * 
 	 * <pre>
-	 * Example of value: mi_app.apk
+	 * Example of value: mi_app.apk | iosApp.app
 	 * </pre>
 	 */
 	public static final String APP = "config.app";
-
-	  /**
-	 * Key to be used in the {@link PropertiesManager} to get the value of 
-	 * the pom.xml.
-	 * <p>
-	 * This constant is the activity name for the Android activity you want to wait for.
-	 * This value <b> is not mandatory </b> if the application does not have splash screen. 
-	 * 
-	 * <pre>
-	 * Example of value: es.sdos.sdosproject.ui.navigation.activity.SelectStoreActivity
-	 * </pre>
-     * 
-     */
-	public static final String APP_WAIT_ACTIVITY = "config.androidAppWaitActivity";
-	
-	  /**
-	 * Key to be used in the {@link PropertiesManager} to get the value of 
-	 * the pom.xml.
-	 * <p>
-	 * This constant is the Android package for the App you are waiting to launch.
-	 * 
-	 * <pre>
-	 * Example of value: com.inditex.ecommerce.bershka.test
-	 * </pre>
-   * 
-   */
-	public static final String APP_PACKAGE = "config.appPackage";
-	
-	/**
-	 * Key to be used in the {@link PropertiesManager} to get the value of the
-	 * pom.xml.
-	 * <p>
-	 * This constant is the Android Main Activity (Launch Activity) for the Android
-	 * App. <b>IMPORTANT</b> This capability is MANDATORY in some application, e.g.
-	 * all the Inditex applications.
-	 * 
-	 * <pre>
-	 * Example of value: es.sdos.sdosproject.ui.splash.activity.LaunchActivity
-	 * </pre>
-	 * 
-	 */
-	public static final String APP_ACTIVITY = "config.androidAppActivity";
-	
-	
-	/**
-	 * Key to be used in the {@link PropertiesManager} to get the value of the
-	 * pom.xml.
-	 * <p>
-	 * This constant is the boolean option of display the XCode Log.
-	 * 
-	 * <pre>
-	 * Example of value: true |  false
-	 * </pre>
-	 * 
-	 */
-	public static final String SHOW_XCODE_LOG = "config.iosShowXCodeLog";
-	
-	/**
-	 * Key to be used in the {@link PropertiesManager} to get the value of the
-	 * pom.xml.
-	 * <p>
-	 * This constant is the boolean option of display the iOS Log.
-	 * 
-	 * <pre>
-	 * Example of value: true |  false
-	 * </pre>
-	 * 
-	 */
-	public static final String SHOW_IOS_LOG = "config.iosShowiOSLog";
-	
-	/**
-	 * Key to be used in the {@link PropertiesManager} to get the value of 
-	 * the pom.xml.
-	 * <p>
-	 * This constant is the boolean option of the APP is hybrid. 
-	 * 
-	 * <pre>
-	 * Example of value: true | false
-	 * </pre>
-	 */
-	public static final String APP_HYBRID = "config.appHybrid";
 	
 	/*--------------------------------------------------------------------* 
 	|							CUSTOM ERRORS
