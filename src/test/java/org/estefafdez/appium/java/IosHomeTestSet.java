@@ -11,7 +11,6 @@ public class IosHomeTestSet extends TestSetConfig {
 
 	/**
 	 * Test to be an example for the first iOS Test using the TestApp.app application <br>
-	 * @see TestRail: <a href="testIosExample"> https://testrail.sdos.es/index.php </a>
 	 */
 	@Test(description = "testIosExample")
 	public void testIosExample() {
@@ -26,7 +25,7 @@ public class IosHomeTestSet extends TestSetConfig {
 			iosHomePage.clickOnInput();
 				
 			/** Send a text into the input */
-			iosHomePage.sendKeyToInput("QA"); 
+			iosHomePage.sendKeyToInput("QA Rocks"); 
 				
 			/** Click on the "Click!" button */
 			iosHomePage.clickOnButton();

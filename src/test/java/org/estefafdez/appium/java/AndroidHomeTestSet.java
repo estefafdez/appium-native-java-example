@@ -8,11 +8,7 @@ import org.estefafdez.appium.java.pageobjects.AndroidHomePage;
 public class AndroidHomeTestSet extends TestSetConfig {
 
 	/**
-	 * Test to be an example for the first Android Test using the
-	 * AndroidBaristaApp.apk application <br>
-	 * 
-	 * @see TestRail: <a href="testAndroidExample">
-	 *      https://testrail.sdos.es/index.php </a>
+	 * Test to be an example for the first Android Test using the AndroidBaristaApp.apk application <br>
 	 */
 	@Test(description = "testAndroidExample")
 	public void testAndroidExample() {
