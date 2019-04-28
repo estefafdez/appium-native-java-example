@@ -20,7 +20,13 @@ Then we need to add the JAVA_HOME path into the bash_profile:
 
 >
 echo 'export JAVA_HOME="$(/usr/libexec/java_home)"' >> ~/.bash_profile
+>
+
+>
 echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> ~/.bash_profile
+>
+
+>
 source ~/.bash_profile
 >
 
