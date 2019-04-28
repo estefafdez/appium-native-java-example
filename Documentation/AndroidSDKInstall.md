@@ -27,9 +27,21 @@ Add the ANDROID_HOME into the bash profile:
 
 >
 echo 'export ANDROID_HOME="/usr/local/share/android-sdk"' >> ~/.bash_profile
+>
+
+>
 echo 'export PATH="$ANDROID_HOME/tools:$PATH"' >> ~/.bash_profile
+>
+
+>
 echo 'export PATH="$ANDROID_HOME/platform-tools:$PATH"' >> ~/.bash_profile
+>
+
+>
 echo 'export PATH="$ANDROID_HOME/platform-tools/adb:$PATH"' >> ~/.bash_profile
+>
+
+>
 source ~/.bash_profile
 >
 
@@ -37,7 +49,13 @@ Create the repositories.cfg file and update the SDK:
 
 >
 touch ~/.android/repositories.cfg
+>
+
+>
 sdkmanager --update
+>
+
+>
 sdkmanager --licenses
 >
 
@@ -45,7 +63,16 @@ Install the packages you need to create android emulators:
 
 >
 sdkmanager --list
+>
+
+>
 sdkmanager "platform-tools"
+>
+
+>
 sdkmanager "build-tools;28.0.0"
+>
+
+>
 sdkmanager "platforms;android-27"
 >
