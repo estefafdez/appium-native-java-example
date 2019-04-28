@@ -5,13 +5,13 @@ _______________________________________
 
 ## Prerequisites
 
-1. [Homebrew installation] (/Documentation/HomebrewConf.md)
-2. [Maven configuration] (/Documentation/MavenConf.md)
-3. [Java installation] (/Documentation/JavaInstall.md)
-4. [Android SDK installation] (/Documentation/AndroidSDKInstall.md)
-4. [Appium installation and configuration.] (/Documentation/AppiumInstall.md)
-5. [Android and iOS Emulators] (/Documentation/Emulators.md)  **
-6. [POM examples (for iOS and Android).] (/Documentation/POM_Examples.md)
+1. [Homebrew installation](/Documentation/HomebrewConf.md)
+2. [Maven configuration](/Documentation/MavenConf.md)
+3. [Java installation](/Documentation/JavaInstall.md)
+4. [Android SDK installation](/Documentation/AndroidSDKInstall.md)
+5. [Appium installation and configuration.](/Documentation/AppiumInstall.md)
+6. [Android and iOS Emulators](/Documentation/Emulators.md)
+7. [POM examples (for iOS and Android).](/Documentation/POM_Examples.md)
 
 ## How to start with the project
 
