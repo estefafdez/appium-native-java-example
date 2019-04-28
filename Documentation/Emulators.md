@@ -23,7 +23,7 @@ android create avd -n testAndroid --force -k "system-images;android-27;google_ap
 
 If you already have an emulator, you can create a script to run it instead of type all the commands, e.g.:
 
-```
+```bash
 #!/bin/bash
 
 echo "Going to the emulator folder"

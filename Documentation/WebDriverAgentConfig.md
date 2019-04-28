@@ -76,9 +76,9 @@ To clean the DerivedData folder you need to:
 
 Also you can remove all the data from the command line typing:
 
->
+```bash
 rm -rf ~/Library/Developer/Xcode/DerivedData
->
+
 rm -rf ~/Library/Caches/com.apple.dt.Xcode
->
+```
 

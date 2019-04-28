@@ -18,17 +18,13 @@ brew cask install homebrew/cask-versions/java8
 
 Then we need to add the JAVA_HOME path into the bash_profile:
 
->
+```bash
 echo 'export JAVA_HOME="$(/usr/libexec/java_home)"' >> ~/.bash_profile
->
 
->
 echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> ~/.bash_profile
->
 
->
 source ~/.bash_profile
->
+```
 
 ## Windows 
 
