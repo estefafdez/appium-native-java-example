@@ -14,6 +14,11 @@ brew install node
 
 * We suggest install version: v10.6.0.
 
+## Install Carthage
+>
+brew install carthage
+>
+
 ## Install the latest version of Appium Server (command line):
 >
 npm install -g appium --unsafe-perm=true --allow-root
@@ -32,15 +37,6 @@ To check the Appium version installed, you need to run the command:
 
 >
 appium -v
->
-
-## Install the latest version of Appium Desktop.
-
-If you prefer to have the Appium Desktop version, you can download it here: [https://github.com/appium/appium-desktop/releases](https://github.com/appium/appium-desktop/releases)
-
-## Install Carthage
->
-brew install carthage
 >
 
 ## Install Appium Doctor
@@ -62,31 +58,6 @@ Check if everything you need to start with Appium and iOS is correct:
 
 >
 appium-doctor --ios --yes
->
-
-## Install the libimobiledevice library.
->
-brew install libimobiledevice --HEAD
->
-
-## Install ideviceinstaller, only works for iOS 9.
->
-brew install ideviceinstaller
->
-
-## Install ios-deploy
->
-npm install -g ios-deploy --unsafe-perm=true --allow-root
->
-
-## Install xcpretty
->
-sudo gem install xcpretty
->
-
-## Install appium-ios-driver
->
-npm install appium-ios-driver
 >
 
 ## Install WebDriverAgent. 
@@ -115,6 +86,35 @@ Execute bootstrap script:
 >
 
 To configure the WebDriverAgent project, you need to follow the instruction [here](/Documentation/WebDriverAgentConfig.md)
+
+## Install the libimobiledevice library.
+>
+brew install libimobiledevice --HEAD
+>
+
+## Install ideviceinstaller, only works for iOS 9.
+>
+brew install ideviceinstaller
+>
+
+## Install ios-deploy
+>
+npm install -g ios-deploy --unsafe-perm=true --allow-root
+>
+
+## Install xcpretty
+>
+sudo gem install xcpretty
+>
+
+## Install appium-ios-driver
+>
+npm install appium-ios-driver
+>
+
+## Install the latest version of Appium Desktop.
+
+If you prefer to have the Appium Desktop version, you can download it here: [https://github.com/appium/appium-desktop/releases](https://github.com/appium/appium-desktop/releases)
 
 # Running Appium.
 

@@ -16,6 +16,12 @@ Copy the project you just download it into the path:
 cd "/usr/local/lib/node_modules/appium/node_modules/appium-xcuitest-driver/WebDriverAgent/"
 >
 
+Create the following folder:
+
+>
+mkdir -p Resources/WebDriverAgent.bundle
+>
+
 Once you have it, execute the Bootstrap Script:
 >
 ./Scripts/bootstrap.sh

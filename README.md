@@ -48,7 +48,7 @@ __*** Remember__ do not forget to use the _AssertTrue_ or _AssertFalse_ on the c
 One example of a test case is:
 
 ```bash
-/**
+	/**
 	 * Test to be an example for the first iOS Test using the TestApp.app application <br>
 	 */
 	@Test(description = "testIosExample")
@@ -102,16 +102,3 @@ __Important:__  To run the test are absolutely necessary two conditions:
 1. The emulator should be running (only on Android, on iOS the MacOSX can create a new instance). 
 2. Appium should be running.
 >
-
-
-## How to run a suite. 
-To launch a suite you need to create a profile with its route as the example:
-
-```
-<profile>
-	<id>acceptance-suite</id>
-	<properties>
-		<testNG.suite>src/test/resources/suites/acceptance.xml</testNG.suite>
-	</properties>
-</profile>
-```
