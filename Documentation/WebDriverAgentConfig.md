@@ -31,23 +31,23 @@ Once you have it, execute the Bootstrap Script:
 
 Once you run the script, open the file __WebDriverAgent.xcodeproj__ with the Xcode.
 
-<img src="http://git.sdos.es/qa/appium-archetype/raw/86d512c6d796b1f572adeb9f74187e8394106022/Documentation/img/1.png" />
+<img src="https://github.com/estefafdez/appium-native-java-example/blob/master/Documentation/img/1.png" />
 
 
 Now, select the WebDriverAgent project and click on the __Info__ tab to change on the __Deployment Target__ , the __iOS Deployment Target__. Select the iOS version you want to test your application. 
 
-<img src="http://git.sdos.es/qa/appium-archetype/raw/86d512c6d796b1f572adeb9f74187e8394106022/Documentation/img/2.png" />
+<img src="https://github.com/estefafdez/appium-native-java-example/blob/master/Documentation/img/2.png" />
 
 
 On the __Build Settings__ tab, on the Deployment settings, change the __iOS Deployment Target__ as well, to match the same version as the Info tab.
 
-<img src="http://git.sdos.es/qa/appium-archetype/raw/86d512c6d796b1f572adeb9f74187e8394106022/Documentation/img/3.png" />
+<img src="https://github.com/estefafdez/appium-native-java-example/blob/master/Documentation/img/3.png" />
 
 
 Once you change the version, make sure you have a __simulator__ selected on the device list and click on __Product -> Test __. 
 The project will compile and execute the WebDriverAgent project on the simulator you choose. 
 
-<img src="http://git.sdos.es/qa/appium-archetype/raw/86d512c6d796b1f572adeb9f74187e8394106022/Documentation/img/4.png" />
+<img src="https://github.com/estefafdez/appium-native-java-example/blob/master/Documentation/img/4.png" />
 
 
 Finally, close the Xcode and set on the archetype project the same version you select on the Project to run your application. 
@@ -62,12 +62,12 @@ To clean the DerivedData folder you need to:
 
 1. Click on Xcode -> Preferences -> Locations -> (->) DerivedData 
 
-<img src="http://git.sdos.es/qa/appium-archetype/raw/86d512c6d796b1f572adeb9f74187e8394106022/Documentation/img/5.png" />
+<img src="https://github.com/estefafdez/appium-native-java-example/blob/master/Documentation/img/5.png" />
 
 
 2. Once you have the DerivedData folder on the Finder, close the Xcode, and delete all the content inside the DerivedData folder.
 
-<img src="http://git.sdos.es/qa/appium-archetype/raw/86d512c6d796b1f572adeb9f74187e8394106022/Documentation/img/6.png" />
+<img src="https://github.com/estefafdez/appium-native-java-example/blob/master/Documentation/img/6.png" />
 
 
 3. Empty the Trash.
