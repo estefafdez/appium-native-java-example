@@ -98,14 +98,14 @@
 	<!--  Dependencies -->
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<appium-java-client.version>7.5.0</appium-java-client.version>
+		<appium-java-client.version>8.0.0</appium-java-client.version>
 		<testng.version>7.5.1</testng.version>
 		<commons-lang3.version>3.11</commons-lang3.version>
 		<aspectj.version>1.8.11</aspectj.version>
-		<appium-java-client.version>7.4.1</appium-java-client.version>
+		<appium-java-client.version>8.0.0</appium-java-client.version>
 		<log4j2.version>2.17.1</log4j2.version>
 		<appium-core.version>1.4.0</appium-core.version>
-		<guava.version>30.1-jre</guava.version>
+		<guava.version>32.0.0-jre</guava.version>
 		
 		<!-- Plugins -->
 		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
