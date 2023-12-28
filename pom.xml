@@ -102,8 +102,8 @@
 		<testng.version>7.8.0</testng.version>
 		<commons-lang3.version>3.13.0</commons-lang3.version>
 		<aspectj.version>1.8.11</aspectj.version>
-		<appium-java-client.version>8.6.0</appium-java-client.version>
-		<log4j2.version>2.21.1</log4j2.version>
+		<appium-java-client.version>8.5.1</appium-java-client.version>
+		<log4j2.version>2.22.0</log4j2.version>
 		<appium-core.version>1.4.0</appium-core.version>
 		<guava.version>32.1.3-jre</guava.version>
 		
