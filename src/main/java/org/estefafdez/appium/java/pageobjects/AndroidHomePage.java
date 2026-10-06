@@ -6,7 +6,6 @@ import org.estefafdez.appium.java.config.BasePageObjectConfig;
 import org.estefafdez.appium.java.constant.AndroidHomeConst;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 
 public class AndroidHomePage extends BasePageObjectConfig{
 
@@ -17,7 +16,7 @@ public class AndroidHomePage extends BasePageObjectConfig{
 	 * Class constructor.
 	 * @param driver
 	 */
-	public AndroidHomePage(AppiumDriver<MobileElement> driver) {
+	public AndroidHomePage(AppiumDriver driver) {
 		super(driver);
 	}
 
