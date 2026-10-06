@@ -114,7 +114,7 @@
 		<guava.version>33.7.2-jre</guava.version>
 		
 		<!-- Plugins -->
-		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
+		<maven-jar-plugin.version>3.5.1</maven-jar-plugin.version>
 		<sonar-maven-plugin.version>5.1</sonar-maven-plugin.version>
 		<sonar-scanner-maven-plugin.version>3.3.0.603</sonar-scanner-maven-plugin.version>
 		<maven-compiler-plugin.version>3.16.0</maven-compiler-plugin.version>
