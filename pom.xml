@@ -110,7 +110,7 @@
 		<!-- Plugins -->
 		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
 		<sonar-maven-plugin.version>5.1</sonar-maven-plugin.version>
-		<sonar-scanner-maven-plugin.version>3.3.0.603</sonar-scanner-maven-plugin.version>
+		<sonar-scanner-maven-plugin.version>5.8.0.7211</sonar-scanner-maven-plugin.version>
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
 		
