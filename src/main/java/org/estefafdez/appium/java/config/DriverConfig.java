@@ -29,7 +29,6 @@ import org.estefafdez.appium.java.utils.CustomErrorException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobilePlatform;
@@ -65,9 +64,9 @@ public class DriverConfig {
 	 * @return the instance of the Driver
 	 * @throws CustomErrorException custom error exception
 	 */
-	public static AppiumDriver<MobileElement> buildInstance(DesiredCapabilities caps) throws CustomErrorException {	
+	public static AppiumDriver buildInstance(DesiredCapabilities caps) throws CustomErrorException {	
 		/** Generic Driver to build the selected platform */
-		AppiumDriver<MobileElement> driver = null;
+		AppiumDriver driver = null;
 		
 		try {
 			/** Set the server URL */
@@ -77,10 +76,10 @@ public class DriverConfig {
 			/** Check the platform selected  */
 			if((MobilePlatform.IOS).equalsIgnoreCase(handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME))) {
 				/** Build Android Driver */
-				driver = new IOSDriver<>(serverUrl, caps);
+				driver = new IOSDriver(serverUrl, caps);
 			} else if((MobilePlatform.ANDROID).equalsIgnoreCase(handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME))) {
 				/** Build IOS Driver */
-				driver = new AndroidDriver<>(serverUrl, caps);
+				driver = new AndroidDriver(serverUrl, caps);
 			} else {
 				throw new CustomErrorException(ConstantConfig.DRIVER_TYPE_NOT_CORRECT_EXCEPTION);
 			}
