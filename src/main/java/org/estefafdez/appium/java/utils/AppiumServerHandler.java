@@ -19,7 +19,7 @@
  */
 package org.estefafdez.appium.java.utils;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -78,7 +78,7 @@ public final class AppiumServerHandler {
 			/** This filters ALL Appium server logs to warning level */
 			builder.withArgument(GeneralServerFlag.LOG_LEVEL, "warn");
 			/** Used to control the start timeouts */
-			builder.withStartUpTimeOut(60, TimeUnit.SECONDS);
+			builder.withTimeout(Duration.ofSeconds(60));
 			/** Used to avoid port collisions */
 			builder.usingAnyFreePort();
 

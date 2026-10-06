@@ -20,6 +20,7 @@
 package org.estefafdez.appium.java.config;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -27,16 +28,18 @@ import org.apache.logging.log4j.Logger;
 import org.estefafdez.appium.java.utils.CustomAssertHandler;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.Rectangle;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.nativekey.KeyEvent;
-import io.appium.java_client.touch.LongPressOptions;
-import io.appium.java_client.touch.offset.ElementOption;
 
 /**
  * <p>
@@ -59,7 +62,7 @@ public abstract class BasePageObjectConfig {
 	private static final Logger LOGGER = LogManager.getLogger(BasePageObjectConfig.class);
 
 	/** Driver instance. */
-	protected final AppiumDriver<MobileElement> driver;
+	protected final AppiumDriver driver;
 
 	/** Single instance of the PropertiesHandler */
 	protected PropertiesManager handler = PropertiesManager.getInstance();
@@ -70,8 +73,6 @@ public abstract class BasePageObjectConfig {
 	/** Provides the event of the keys*/
 	protected KeyEvent keyEvent;
 	
-	/** Provides the ability to using touch action during test execution */
-	protected TouchAction<?> action;
 
 	/** Provide the name of the actual page of associated property */
 	protected String pagePropertyName = this.getClass().getSimpleName().replace("Page", "").toLowerCase();
@@ -89,7 +90,7 @@ public abstract class BasePageObjectConfig {
 	 *
 	 * @param driver the Appium Driver created.
 	 */
-	protected BasePageObjectConfig(AppiumDriver<MobileElement> driver) {
+	protected BasePageObjectConfig(AppiumDriver driver) {
 		this.driver = driver;
 	}
 
@@ -197,7 +198,7 @@ public abstract class BasePageObjectConfig {
 	protected boolean waitForElementIsVisibleByID(String selector, long timeout) {
 		try {
 			LOGGER.info("Waiting for the element to be visible: [" + selector + "]");
-			wait = new WebDriverWait(driver, timeout);
+			wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 			return wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(selector))) != null;
 		} catch (TimeoutException ex) {
 			LOGGER.error("The element is not visible: [" + selector + "]", ex);
@@ -215,7 +216,7 @@ public abstract class BasePageObjectConfig {
 	protected boolean waitForElementIsVisibleByXpath(String selector, long timeout) {
 		try {
 			LOGGER.info("Waiting for the element to be visible: [" + selector + "]");
-			wait = new WebDriverWait(driver, timeout);
+			wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 			return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(selector))) != null;
 		} catch (TimeoutException ex) {
 			LOGGER.error("The element is not visible: [" + selector + "]", ex);
@@ -233,7 +234,7 @@ public abstract class BasePageObjectConfig {
 	protected boolean waitForElementIsEnabledAndClickableByID(String selector) {
 		try {
 			LOGGER.info("Waiting for the element to be enabled and clickable: [" + selector + "]");
-			wait = new WebDriverWait(driver, 10);
+			wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 			return wait.until(ExpectedConditions.elementToBeClickable(By.id(selector))) != null;
 		} catch (TimeoutException ex) {
 			LOGGER.error("The element is not enabled and clickable: [" + selector + "]", ex);
@@ -251,7 +252,7 @@ public abstract class BasePageObjectConfig {
 	protected boolean waitForElementIsEnabledAndClickableByXpath(String selector, String text, long timeout) {
 		try {
 			LOGGER.info("Waiting for the element to be enabled and clickable: [" + selector + "]");
-			wait = new WebDriverWait(driver, 10);
+			wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 			return wait.until(ExpectedConditions.elementToBeClickable(By.id(selector))) != null;
 		} catch (TimeoutException ex) {
 			LOGGER.error("The element is not enabled and clickable: [" + selector + "]", ex);
@@ -274,20 +275,8 @@ public abstract class BasePageObjectConfig {
 		try {
 			LOGGER.info("Performing long click on the element: [" + selector + "]");
 
-			LongPressOptions longPressOptions = new LongPressOptions();
 			Duration timer = Duration.ofSeconds(time);
-			action = new TouchAction<>(driver);
-
-			if (timer.getSeconds() > 0) {
-				LOGGER.info("Pressing the button for " + timer.getSeconds() + " seconds");
-				longPressOptions.withDuration(timer).withElement(ElementOption.element(driver.findElement(By.id(selector))));
-				action.longPress(longPressOptions).release();
-				action.perform();
-			} else {
-				longPressOptions.withElement(ElementOption.element(driver.findElement(By.id(selector))));
-				action.longPress(longPressOptions).release();
-				action.perform();
-			}
+			longPress(driver.findElement(By.id(selector)), timer);
 		} catch (NoSuchElementException ex) {
 			CustomAssertHandler.handlerError(
 					"Trying to perform a long click on the element [" + selector + "] but it was not found.", ex);
@@ -305,24 +294,30 @@ public abstract class BasePageObjectConfig {
 		try {
 			LOGGER.info("Performing long click on the element: [" + selector + "]");
 
-			LongPressOptions longPressOptions = new LongPressOptions();
 			Duration timer = Duration.ofSeconds(time);
-			action = new TouchAction<>(driver);
-
-			if (timer.getSeconds() > 0) {
-				LOGGER.info("Pressing the button for " + timer.getSeconds() + " seconds");
-				longPressOptions.withDuration(timer).withElement(ElementOption.element(driver.findElement(By.xpath(selector))));
-				action.longPress(longPressOptions).release();
-				action.perform();
-			} else {
-				longPressOptions.withElement(ElementOption.element(driver.findElement(By.xpath(selector))));
-				action.longPress(longPressOptions).release();
-				action.perform();
-			}
+			longPress(driver.findElement(By.xpath(selector)), timer);
 		} catch (NoSuchElementException ex) {
 			CustomAssertHandler.handlerError(
 					"Trying to perform a long click on the element [" + selector + "] but it was not found.", ex);
 		}
+	}
+
+	/**
+	 * Method to long press on an element during a given time, using W3C actions
+	 *
+	 * @param element to press
+	 * @param duration of the press
+	 */
+	private void longPress(WebElement element, Duration duration) {
+		Rectangle rect = element.getRect();
+		Point center = new Point(rect.getX() + rect.getWidth() / 2, rect.getY() + rect.getHeight() / 2);
+		PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+		Sequence press = new Sequence(finger, 0);
+		press.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), center.getX(), center.getY()));
+		press.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+		press.addAction(new Pause(finger, duration));
+		press.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+		driver.perform(Arrays.asList(press));
 	}
 
 	/*--------------------------------------------------------------------* 
