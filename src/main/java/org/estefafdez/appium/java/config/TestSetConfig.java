@@ -45,11 +45,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.InteractsWithApps;
 import io.appium.java_client.remote.AutomationName;
-import io.appium.java_client.remote.IOSMobileCapabilityType;
-import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.remote.MobilePlatform;
 
 /**
@@ -72,7 +69,7 @@ public abstract class TestSetConfig {
 	 * Make the Driver static. This allows it to be created only once and used
 	 * across all of the test classes.
 	 */
-	public static AppiumDriver<MobileElement> driver;
+	public static AppiumDriver driver;
 
 	/** Logger class initialization. */
 	private static final Logger LOGGER = LogManager.getLogger(TestSetConfig.class);
@@ -132,7 +129,9 @@ public abstract class TestSetConfig {
 
 		LOGGER.info("[ Test Status ] - Reset the currently running App for this session");
 		LOGGER.info(ConstantConfig.LOG_SEPARATOR);
-		driver.resetApp();
+		String appId = (String) caps.getCapability(handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME).equalsIgnoreCase(MobilePlatform.ANDROID) ? "appium:appPackage" : "appium:bundleId");
+		((InteractsWithApps) driver).terminateApp(appId);
+		((InteractsWithApps) driver).activateApp(appId);
 	}
 
 	/**
@@ -143,10 +142,10 @@ public abstract class TestSetConfig {
 		LOGGER.info(ConstantConfig.LOG_SEPARATOR);
 		LOGGER.info("[ Driver Configuration ] - Unistalling the current running App");
 		if ((MobilePlatform.ANDROID).equalsIgnoreCase(handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME))) {
-			driver.removeApp((String) caps.getCapability(AndroidMobileCapabilityType.APP_PACKAGE));
+			((InteractsWithApps) driver).removeApp((String) caps.getCapability("appium:appPackage"));
 		}
 		else {
-			driver.removeApp((String) caps.getCapability(IOSMobileCapabilityType.BUNDLE_ID));
+			((InteractsWithApps) driver).removeApp((String) caps.getCapability("appium:bundleId"));
 		}
 		
 		LOGGER.info("[ Driver Configuration ] - Quit this Driver, closing every instance associated");
@@ -221,44 +220,44 @@ public abstract class TestSetConfig {
 		/*--------------------------------------------------------------------* 
 		|		GENERAL CAPABILITIES												
 		*---------------------------------------------------------------------*/
-		caps.setCapability(MobileCapabilityType.PLATFORM_NAME,
+		caps.setCapability("platformName",
 				handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME));
-		caps.setCapability(MobileCapabilityType.APP, handler.getConfigValueFromMatrix(ConstantConfig.APP));
+		caps.setCapability("appium:app", handler.getConfigValueFromMatrix(ConstantConfig.APP));
 
 		if ((MobilePlatform.ANDROID).equalsIgnoreCase(handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME))) {
 			/*--------------------------------------------------------------------* 
 			|		ANDROID CAPABILITIES												
 			*---------------------------------------------------------------------*/
-			caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "8.1.0");
-			caps.setCapability(MobileCapabilityType.DEVICE_NAME, "emulator_27");
-			caps.setCapability(MobileCapabilityType.NO_RESET, false);
-			caps.setCapability(MobileCapabilityType.FULL_RESET, false);
-			caps.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, true);
-			caps.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.example.estefafdez.myfirstandroidapp");
-			caps.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "");
-			caps.setCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY, "");
-			caps.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
-			caps.setCapability(AndroidMobileCapabilityType.DISABLE_ANDROID_WATCHERS, true);
-			caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.APPIUM);
-			caps.setCapability(AndroidMobileCapabilityType.UNICODE_KEYBOARD, true);
+			caps.setCapability("appium:platformVersion", "8.1.0");
+			caps.setCapability("appium:deviceName", "emulator_27");
+			caps.setCapability("appium:noReset", false);
+			caps.setCapability("appium:fullReset", false);
+			caps.setCapability("appium:clearSystemFiles", true);
+			caps.setCapability("appium:appPackage", "com.example.estefafdez.myfirstandroidapp");
+			caps.setCapability("appium:appActivity", "");
+			caps.setCapability("appium:appWaitActivity", "");
+			caps.setCapability("appium:autoGrantPermissions", true);
+			caps.setCapability("appium:disableAndroidWatchers", true);
+			caps.setCapability("appium:automationName", AutomationName.ANDROID_UIAUTOMATOR2);
+			caps.setCapability("appium:unicodeKeyboard", true);
 
 		} else if ((MobilePlatform.IOS)
 				.equalsIgnoreCase(handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME))) {
 			/*--------------------------------------------------------------------* 
 			|		IOS CAPABILITIES												
 			*---------------------------------------------------------------------*/
-			caps.setCapability(MobileCapabilityType.PLATFORM_VERSION, "11.3");
-			caps.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 7");
-			caps.setCapability(MobileCapabilityType.NO_RESET, false);
-			caps.setCapability(MobileCapabilityType.FULL_RESET, false);
-			caps.setCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES, true);
-			caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
-			caps.setCapability(IOSMobileCapabilityType.BUNDLE_ID, "com.estefafdez.ios.test.app");
-			caps.setCapability(IOSMobileCapabilityType.SHOW_XCODE_LOG, false);
-			caps.setCapability(IOSMobileCapabilityType.SHOW_IOS_LOG, false);
-			caps.setCapability(IOSMobileCapabilityType.USE_NEW_WDA, true);
-			caps.setCapability(IOSMobileCapabilityType.RESET_ON_SESSION_START_ONLY, true);
-			caps.setCapability(IOSMobileCapabilityType.AUTO_ACCEPT_ALERTS, true);
+			caps.setCapability("appium:platformVersion", "11.3");
+			caps.setCapability("appium:deviceName", "iPhone 7");
+			caps.setCapability("appium:noReset", false);
+			caps.setCapability("appium:fullReset", false);
+			caps.setCapability("appium:clearSystemFiles", true);
+			caps.setCapability("appium:automationName", AutomationName.IOS_XCUI_TEST);
+			caps.setCapability("appium:bundleId", "com.estefafdez.ios.test.app");
+			caps.setCapability("appium:showXcodeLog", false);
+			caps.setCapability("appium:showIOSLog", false);
+			caps.setCapability("appium:useNewWDA", true);
+			caps.setCapability("appium:resetOnSessionStartOnly", true);
+			caps.setCapability("appium:autoAcceptAlerts", true);
 		} else {
 			throw new CustomErrorException("[ Test Configuration ] - No correct Platform selected");
 		}
@@ -360,37 +359,37 @@ public abstract class TestSetConfig {
 		LOGGER.info(ConstantConfig.LOG_SEPARATOR);
 		if ((MobilePlatform.ANDROID).equalsIgnoreCase(handler.getConfigValueFromMatrix(ConstantConfig.PLATFORM_NAME))) {
 			LOGGER.info(" DEVICE PROPERTIES");
-			LOGGER.info("\tPlatform Name:\t\t" + caps.getCapability(MobileCapabilityType.PLATFORM_NAME));
-			LOGGER.info("\tDevice Name:\t\t" + caps.getCapability(MobileCapabilityType.DEVICE_NAME));
-			LOGGER.info("\tPlatform Version:\t" + caps.getCapability(MobileCapabilityType.PLATFORM_VERSION));
-			LOGGER.info("\tAutomation Engine:\t" + caps.getCapability(MobileCapabilityType.AUTOMATION_NAME));
-			LOGGER.info("\tNo Reset:\t\t" + caps.getCapability(MobileCapabilityType.NO_RESET));
-			LOGGER.info("\tFull Reset:\t\t" + caps.getCapability(MobileCapabilityType.FULL_RESET));
-			LOGGER.info("\tClean System Files:\t" + caps.getCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES));
+			LOGGER.info("\tPlatform Name:\t\t" + caps.getCapability("platformName"));
+			LOGGER.info("\tDevice Name:\t\t" + caps.getCapability("appium:deviceName"));
+			LOGGER.info("\tPlatform Version:\t" + caps.getCapability("appium:platformVersion"));
+			LOGGER.info("\tAutomation Engine:\t" + caps.getCapability("appium:automationName"));
+			LOGGER.info("\tNo Reset:\t\t" + caps.getCapability("appium:noReset"));
+			LOGGER.info("\tFull Reset:\t\t" + caps.getCapability("appium:fullReset"));
+			LOGGER.info("\tClean System Files:\t" + caps.getCapability("appium:clearSystemFiles"));
 			LOGGER.info(" APP PROPERTIES");
-			LOGGER.info("\tApp:\t\t\t" + caps.getCapability(MobileCapabilityType.APP));
+			LOGGER.info("\tApp:\t\t\t" + caps.getCapability("appium:app"));
 			LOGGER.info(" ANDROID PROPERTIES");
-			LOGGER.info("\tApp Package:\t\t" + caps.getCapability(AndroidMobileCapabilityType.APP_PACKAGE));
-			LOGGER.info("\tApp Activity:\t\t" + caps.getCapability(AndroidMobileCapabilityType.APP_ACTIVITY));
-			LOGGER.info("\tApp Wait Activity:\t" + caps.getCapability(AndroidMobileCapabilityType.APP_WAIT_ACTIVITY));
+			LOGGER.info("\tApp Package:\t\t" + caps.getCapability("appium:appPackage"));
+			LOGGER.info("\tApp Activity:\t\t" + caps.getCapability("appium:appActivity"));
+			LOGGER.info("\tApp Wait Activity:\t" + caps.getCapability("appium:appWaitActivity"));
 			LOGGER.info("\tAuto Grant Permissions:\t"
-					+ caps.getCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS));
-			LOGGER.info("\tDisable Watchers:\t" + caps.getCapability(AndroidMobileCapabilityType.DISABLE_ANDROID_WATCHERS));
+					+ caps.getCapability("appium:autoGrantPermissions"));
+			LOGGER.info("\tDisable Watchers:\t" + caps.getCapability("appium:disableAndroidWatchers"));
 		} else {
 			LOGGER.info(" DEVICE PROPERTIES");
-			LOGGER.info("\tPlatform Name:\t\t" + caps.getCapability(MobileCapabilityType.PLATFORM_NAME));
-			LOGGER.info("\tDevice Name:\t\t" + caps.getCapability(MobileCapabilityType.DEVICE_NAME));
-			LOGGER.info("\tPlatform Version:\t" + caps.getCapability(MobileCapabilityType.PLATFORM_VERSION));
-			LOGGER.info("\tAutomation Engine:\t" + caps.getCapability(MobileCapabilityType.AUTOMATION_NAME));
-			LOGGER.info("\tNo Reset:\t\t" + caps.getCapability(MobileCapabilityType.NO_RESET));
-			LOGGER.info("\tFull Reset:\t\t" + caps.getCapability(MobileCapabilityType.FULL_RESET));
-			LOGGER.info("\tClean System Files:\t" + caps.getCapability(MobileCapabilityType.CLEAR_SYSTEM_FILES));
+			LOGGER.info("\tPlatform Name:\t\t" + caps.getCapability("platformName"));
+			LOGGER.info("\tDevice Name:\t\t" + caps.getCapability("appium:deviceName"));
+			LOGGER.info("\tPlatform Version:\t" + caps.getCapability("appium:platformVersion"));
+			LOGGER.info("\tAutomation Engine:\t" + caps.getCapability("appium:automationName"));
+			LOGGER.info("\tNo Reset:\t\t" + caps.getCapability("appium:noReset"));
+			LOGGER.info("\tFull Reset:\t\t" + caps.getCapability("appium:fullReset"));
+			LOGGER.info("\tClean System Files:\t" + caps.getCapability("appium:clearSystemFiles"));
 			LOGGER.info(" APP PROPERTIES");
-			LOGGER.info("\tApp:\t\t\t" + caps.getCapability(MobileCapabilityType.APP));
+			LOGGER.info("\tApp:\t\t\t" + caps.getCapability("appium:app"));
 			LOGGER.info(" iOS PROPERTIES");
-			LOGGER.info("\tApp Package:\t\t" + caps.getCapability(IOSMobileCapabilityType.BUNDLE_ID));
-			LOGGER.info("\tShow Xcode Log:\t\t" + caps.getCapability(IOSMobileCapabilityType.SHOW_XCODE_LOG));
-			LOGGER.info("\tShow iOS Log:\t\t" + caps.getCapability(IOSMobileCapabilityType.SHOW_IOS_LOG));
+			LOGGER.info("\tApp Package:\t\t" + caps.getCapability("appium:bundleId"));
+			LOGGER.info("\tShow Xcode Log:\t\t" + caps.getCapability("appium:showXcodeLog"));
+			LOGGER.info("\tShow iOS Log:\t\t" + caps.getCapability("appium:showIOSLog"));
 		}
 		LOGGER.info(ConstantConfig.LOG_SEPARATOR);
 	}
