@@ -109,7 +109,7 @@
 		<commons-io.version>2.22.0</commons-io.version>
 		<aspectj.version>1.8.11</aspectj.version>
 		<log4j2.version>2.26.1</log4j2.version>
-		<appium-java-client.version>10.1.1</appium-java-client.version>
+		<appium-java-client.version>11.0.0</appium-java-client.version>
 		<appium-core.version>1.4.0</appium-core.version>
 		<guava.version>33.7.2-jre</guava.version>
 		
