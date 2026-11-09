@@ -111,7 +111,7 @@
 		<log4j2.version>2.26.1</log4j2.version>
 		<appium-java-client.version>11.0.0</appium-java-client.version>
 		<appium-core.version>1.4.0</appium-core.version>
-		<guava.version>33.7.2-jre</guava.version>
+		<guava.version>33.8.0-jre</guava.version>
 		
 		<!-- Plugins -->
 		<maven-jar-plugin.version>3.5.1</maven-jar-plugin.version>
